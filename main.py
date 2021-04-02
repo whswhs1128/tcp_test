@@ -64,6 +64,7 @@ if __name__ == '__main__':
             recv_buff = conn.recv(800)
             if recv_buff:
                 print_hex(recv_buff)
+                bytearray.clear(recv_buff)
                 break
 
     server.close()
