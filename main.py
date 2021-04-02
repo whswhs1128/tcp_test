@@ -6,6 +6,8 @@ import socket
 import time
 from http import server
 
+import null as null
+
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 server = socket.socket()
@@ -46,7 +48,7 @@ if __name__ == '__main__':
     state[15] = 0x1  # 帧方向 1：控制器到显示屏 2：显示屏到控制器
     state[22] = 0x1  # 实例数据
     state[23] = 0x1  # 实例数据
-    recv_buff = bytearray(800)
+    recv_buff = bytearray(1024)
 
     while True:
         conn, addr = server.accept()
@@ -60,9 +62,8 @@ if __name__ == '__main__':
             #     break
             time.sleep(1)
             recv_buff = conn.recv(800)
-            if not recv_buff:
+            if recv_buff:
                 print_hex(recv_buff)
                 break
-
 
     server.close()
